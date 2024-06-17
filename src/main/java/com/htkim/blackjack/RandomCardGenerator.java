@@ -4,8 +4,11 @@ import java.util.Random;
 
 public class RandomCardGenerator implements CardGenerator {
 
-    private final Random random = new Random();
+    private final Random random;
 
+    public RandomCardGenerator(Random random) {
+        this.random = random;
+    }
     @Override
     public Card generate() {
         return Card.from(this.generateRandomType(), this.generateRandomNumber());

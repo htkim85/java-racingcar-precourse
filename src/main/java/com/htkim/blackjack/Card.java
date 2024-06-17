@@ -18,11 +18,44 @@ public class Card {
         return this.number;
     }
 
+    public String getCardName() {
+
+        String expressName = "";
+        if( number == 1 ) {
+            expressName = "A";
+        }
+
+        if( number == 11 ) {
+            expressName = "J";
+        }
+        if( number == 12) {
+            expressName = "Q";
+        }
+        if( number == 13 ) {
+            expressName = "K";
+        }
+
+        if( number > 1 && number <=10) {
+            expressName = String.valueOf(number);
+        }
+
+        return  expressName + this.type.koName;
+    }
+
     public enum Type {
-        DIAMOND,
-        CLOVER,
-        SPADE,
-        HEART
+        DIAMOND("다이아몬드"),
+        CLOVER("클로버"),
+        SPADE("스페이드"),
+        HEART("하트");
+
+        public String getKoName() {
+            return koName;
+        }
+
+        private String koName;
+        Type(String ko) {
+            this.koName = ko;
+        }
     }
 
     private static final Map<Type, List<Card>> cacheMap = new HashMap<>();

@@ -1,6 +1,7 @@
 package com.htkim.blackjack;
 
-import java.util.List;
+
+import java.util.ArrayList;
 
 public class Player {
 
@@ -8,11 +9,12 @@ public class Player {
 
     private final String name;
 
-    private List<Card> cards;
+    private Cards cards;
 
     public Player(Type type, String name) {
         this.playerType = type;
         this.name = name;
+        cards = new Cards(new ArrayList<>());
     }
 
     public Type getType() {
@@ -21,6 +23,14 @@ public class Player {
 
     public String getName() {
         return name;
+    }
+
+    public boolean addCard(Card card) {
+        return cards.addCard(card);
+    }
+
+    public Cards getCards() {
+        return this.cards;
     }
 
 

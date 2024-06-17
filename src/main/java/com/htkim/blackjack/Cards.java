@@ -1,12 +1,14 @@
 package com.htkim.blackjack;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Cards {
     private List<Card> cards;
 
-    public Cards(Card ... cards ) {
-        this.cards = List.of(cards);
+    public Cards(List<Card> cards) {
+        this.cards = cards;
     }
 
     public boolean addCard(Card card) {
@@ -15,5 +17,9 @@ public class Cards {
 
     public int blackJackNumber() {
         return cards.stream().mapToInt(Card::getNumber).sum();
+    }
+
+    public Stream<Card> stream() {
+        return cards.stream();
     }
 }
