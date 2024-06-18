@@ -8,5 +8,7 @@ public class Application {
         UI ui = new UI(scanner);
         ui.inputPlayerNames();
         ui.initBlackJackGame();
+        ui.startBlackJackGame();
+        ui.gameResult();
     }
 }
