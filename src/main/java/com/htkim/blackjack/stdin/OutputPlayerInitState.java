@@ -14,7 +14,7 @@ public class OutputPlayerInitState implements OutputToStdOut<Players> {
                 .map(Player::getName)
                 .collect(Collectors.joining(", "));
         System.out.println();
-        System.out.printf("딜러와 %s에게 2장의 카드를 나누었습니다%n", names);
+        System.out.printf("딜러와 %s에게 2장의 카드를 나누었습니다.%n", names);
         printDealerState(players);
         printGamerState(players);
     }
