@@ -3,10 +3,20 @@ package com.htkim.blackjack;
 public class WinnerCheck {
 
     public enum Result {
-        PLAYER_WIN,
-        DEALER_WIN,
-        DRAW
+        PLAYER_WIN("승"),
+        DEALER_WIN("패"),
+        DRAW("무");
+
+        private String koName;
+        public String getKoName() {
+            return koName;
+        }
+
+        Result(String result) {
+            this.koName = result;
+        }
     }
+
     public Result checkWinner(int dealerScore, int playerScore) {
         if( playerScore > 21 ) {
             return Result.DEALER_WIN;
