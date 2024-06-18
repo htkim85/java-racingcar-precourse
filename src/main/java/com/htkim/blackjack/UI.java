@@ -71,7 +71,7 @@ public class UI {
 
     private void startDealerGame() {
         while (true) {
-            int sum = dealer.getCards().stream().mapToInt(Card::getNumber).sum();
+            int sum = dealer.getCards().blackJackNumber();
             if (sum > 17) {
                 break;
             }
@@ -88,7 +88,7 @@ public class UI {
 
     public void winnerResult() {
         OutputSimplePrint simplePrint = new OutputSimplePrint();
-        int dealerScore = dealer.getCards().stream().mapToInt(Card::getNumber).sum();
+        int dealerScore = dealer.getCards().blackJackNumber();
         WinnerCheck winnerCheck = new WinnerCheck();
 
         List<WinnerCheckResult> result = players.stream()

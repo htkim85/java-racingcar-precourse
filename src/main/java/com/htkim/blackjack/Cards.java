@@ -16,7 +16,7 @@ public class Cards {
     }
 
     public int blackJackNumber() {
-        return cards.stream().mapToInt(Card::getNumber).sum();
+        return cards.stream().mapToInt(Card::getScore).sum();
     }
 
     public Stream<Card> stream() {

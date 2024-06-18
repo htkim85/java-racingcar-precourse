@@ -32,7 +32,7 @@ public class WinnerCheck {
 
 
     public WinnerCheckResult checkWinner(int dealerScore, Player player) {
-        int playerSum = player.getCards().stream().mapToInt(Card::getNumber).sum();
+        int playerSum = player.getCards().blackJackNumber();
         return new WinnerCheckResult(player,  this.checkWinner(dealerScore, playerSum));
     }
 }

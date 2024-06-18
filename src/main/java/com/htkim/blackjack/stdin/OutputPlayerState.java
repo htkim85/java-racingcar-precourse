@@ -9,7 +9,7 @@ public class OutputPlayerState implements OutputToStdOut<Player> {
     @Override
     public void print(Player player) {
         String cardNames = player.getCards().stream().map(Card::getCardName).collect(Collectors.joining(", "));
-        int sum = player.getCards().stream().mapToInt(Card::getNumber).sum();
+        int sum = player.getCards().blackJackNumber();
         System.out.println(player.getName() + " 카드: " + cardNames + " - 결과: " + sum);
     }
 }

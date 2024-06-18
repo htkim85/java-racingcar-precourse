@@ -1,14 +1,16 @@
 package com.htkim.blackjack;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Card {
 
     private final Type type;
     // 1 - 13
     private final int number;
+
+    private final int score;
+
+    private final String expressName;
 
     private static final Map<Type, List<Card>> cacheMap = new HashMap<>();
 
@@ -28,16 +30,11 @@ public class Card {
             this.koName = ko;
         }
     }
-    private Card(Type type, int num) {
+    private Card(Type type, int num, int score, String expressName) {
         this.number = num;
         this.type = type;
-    }
-
-    static {
-        cardNames.put(1, "A");
-        cardNames.put(11, "J");
-        cardNames.put(12, "Q");
-        cardNames.put(13, "K");
+        this.score = score;
+        this.expressName = expressName;
     }
 
     static {
@@ -49,9 +46,22 @@ public class Card {
 
 
     private static List<Card> genNumber(Type type) {
-        return IntStream.rangeClosed(1, 13)
-                .mapToObj(cardNum -> new Card(type, cardNum))
-                .collect(Collectors.toList());
+        return List.of(
+                new Card(type, 1, 1, "A"),
+                new Card(type, 1, 11, "A"),
+                new Card(type, 2, 2, "2"),
+                new Card(type, 3, 3, "3"),
+                new Card(type, 4, 4, "4"),
+                new Card(type, 5, 5, "5"),
+                new Card(type, 6, 6, "6"),
+                new Card(type, 7, 7, "7"),
+                new Card(type, 8, 8, "8"),
+                new Card(type, 9, 9, "9"),
+                new Card(type, 10, 10, "10"),
+                new Card(type, 11, 10, "J"),
+                new Card(type, 12, 10, "Q"),
+                new Card(type, 13, 10, "K")
+        );
     }
 
     public static Card from(Type type, int num) {
@@ -71,8 +81,12 @@ public class Card {
         return this.number;
     }
 
+    public int getScore() {
+        return this.score;
+    }
+
     public String getCardName() {
-        String expressName = cardNames.getOrDefault(number, String.valueOf(number));
-        return expressName + this.type.koName;
+//        String expressName = cardNames.getOrDefault(number, String.valueOf(number));
+        return this.expressName + this.type.koName + "(" + score + ")";
     }
 }
