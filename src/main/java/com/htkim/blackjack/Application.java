@@ -10,5 +10,6 @@ public class Application {
         ui.initBlackJackGame();
         ui.startBlackJackGame();
         ui.gameResult();
+        ui.winnerResult();
     }
 }

@@ -29,4 +29,8 @@ public class Players {
     public Stream<Player> stream() {
         return this.players.stream();
     }
+
+    public int size() {
+        return this.players.size();
+    }
 }

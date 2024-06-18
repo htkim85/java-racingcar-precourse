@@ -2,8 +2,11 @@ package com.htkim.blackjack;
 
 import com.htkim.blackjack.stdin.*;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class UI {
 
@@ -81,5 +84,19 @@ public class UI {
         OutputToStdOut outputPlayerState = new OutputPlayerState();
         outputPlayerState.print(dealer);
         this.players.stream().forEach(player -> outputPlayerState.print(player));
+    }
+
+    public void winnerResult() {
+        OutputSimplePrint simplePrint = new OutputSimplePrint();
+        int dealerScore = dealer.getCards().stream().mapToInt(Card::getNumber).sum();
+        WinnerCheck winnerCheck = new WinnerCheck();
+
+        List<WinnerCheck.Result> result = players.stream()
+                .map(player -> player.getCards().stream().mapToInt(Card::getNumber).sum())
+                .map(playerScore -> winnerCheck.checkWinner(dealerScore, playerScore)).toList();
+
+        Map<WinnerCheck.Result, List<WinnerCheck.Result>> grouped = result.stream().collect(Collectors.groupingBy(r -> r));
+        simplePrint.print(dealer.getName() + ": " + grouped.get(WinnerCheck.Result.DEALER_WIN).size()+"승 " +
+                grouped.get(WinnerCheck.Result.PLAYER_WIN).size()+"패 " + grouped.get(WinnerCheck.Result.DRAW).size() + "무");
     }
 }
