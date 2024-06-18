@@ -29,4 +29,10 @@ public class WinnerCheck {
 
         return Result.DRAW;
     }
+
+
+    public WinnerCheckResult checkWinner(int dealerScore, Player player) {
+        int playerSum = player.getCards().stream().mapToInt(Card::getNumber).sum();
+        return new WinnerCheckResult(player,  this.checkWinner(dealerScore, playerSum));
+    }
 }

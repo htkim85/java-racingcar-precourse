@@ -91,12 +91,19 @@ public class UI {
         int dealerScore = dealer.getCards().stream().mapToInt(Card::getNumber).sum();
         WinnerCheck winnerCheck = new WinnerCheck();
 
-        List<WinnerCheck.Result> result = players.stream()
-                .map(player -> player.getCards().stream().mapToInt(Card::getNumber).sum())
-                .map(playerScore -> winnerCheck.checkWinner(dealerScore, playerScore)).toList();
+        List<WinnerCheckResult> result = players.stream()
+                .map(player -> winnerCheck.checkWinner(dealerScore, player)).toList();
 
-        Map<WinnerCheck.Result, List<WinnerCheck.Result>> grouped = result.stream().collect(Collectors.groupingBy(r -> r));
-        simplePrint.print(dealer.getName() + ": " + grouped.get(WinnerCheck.Result.DEALER_WIN).size()+"승 " +
-                grouped.get(WinnerCheck.Result.PLAYER_WIN).size()+"패 " + grouped.get(WinnerCheck.Result.DRAW).size() + "무");
+        Map<WinnerCheck.Result, List<WinnerCheckResult>> grouped = result.stream().collect(Collectors.groupingBy(WinnerCheckResult::getResult));
+        simplePrint.print(dealer.getName() + ": " + getSize(grouped.get(WinnerCheck.Result.DEALER_WIN))+"승 " +
+                getSize(grouped.get(WinnerCheck.Result.PLAYER_WIN))+"패 " + getSize(grouped.get(WinnerCheck.Result.DRAW)) + "무");
+        result.forEach(wc -> {
+            simplePrint.print(wc.getPlayer().getName() + ": " + wc.getResult());
+        });
+    }
+
+    private int getSize(List<WinnerCheckResult> list ) {
+        if( list == null ) return 0;
+        return list.size();
     }
 }
