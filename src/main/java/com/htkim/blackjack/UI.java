@@ -98,7 +98,7 @@ public class UI {
         simplePrint.print(dealer.getName() + ": " + getSize(grouped.get(WinnerCheck.Result.DEALER_WIN))+"승 " +
                 getSize(grouped.get(WinnerCheck.Result.PLAYER_WIN))+"패 " + getSize(grouped.get(WinnerCheck.Result.DRAW)) + "무");
         result.forEach(wc -> {
-            simplePrint.print(wc.getPlayer().getName() + ": " + wc.getResult());
+            simplePrint.print(wc.getPlayer().getName() + ": " + wc.getResult().getKoName());
         });
     }
 
